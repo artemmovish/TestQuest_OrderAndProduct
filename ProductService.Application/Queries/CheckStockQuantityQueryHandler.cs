@@ -24,9 +24,7 @@ namespace ProductService.Application.Queries
         }
         public async Task<CommandResponse<CheckStockQuantityResponse>> Handle(CheckStockQuantityQuery request, CancellationToken cancellationToken)
         {
-            var stockQuantityRequest = request.stockQuantityRequest;
-
-            var product = await _repository.GetAsync(stockQuantityRequest.Id);
+            var product = await _repository.GetAsync(request.Id);
 
             if (product == null)
             {
@@ -42,7 +40,7 @@ namespace ProductService.Application.Queries
                 new CheckStockQuantityResponse()
                 {
                     Id = product.Id,
-                    Success = (product.StockQuantity >= stockQuantityRequest.Quantity),
+                    Success = (product.StockQuantity >= request.StockQuantity),
                     StockQuantity = product.StockQuantity
                 });
         }

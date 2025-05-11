@@ -12,6 +12,7 @@ namespace ProductService.Application.Queries
 {
     public class GetProductQuery : IRequest<CommandResponse<ProductResponse>>
     {
-        public GetProductRequest getProductRequest { get; set; }
+        public Guid Id { get; set; }
     }
+
 }

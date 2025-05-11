@@ -24,17 +24,16 @@ namespace ProductService.Application.Commands
         }
         public async Task<CommandResponse<StockQuantityResponse>> Handle(AddToStockProductCommand request, CancellationToken cancellationToken)
         {
-            var stockQuantityRequest = request.stockQuantityRequest;
 
-            await _repository.AddToStockAsync(stockQuantityRequest.Id, stockQuantityRequest.Quantity);
+            await _repository.AddToStockAsync(request.Id, request.Quantity);
 
             return new CommandResponse<StockQuantityResponse>(
                 true,
                 "Количество товара успешно обновлено",
                 new StockQuantityResponse()
                 {
-                    Id = stockQuantityRequest.Id,
-                    StockQuantity = await _repository.GetStockQuantityAsync(stockQuantityRequest.Id)
+                    Id = request.Id,
+                    StockQuantity = await _repository.GetStockQuantityAsync(request.Id)
                 });
         }
     }

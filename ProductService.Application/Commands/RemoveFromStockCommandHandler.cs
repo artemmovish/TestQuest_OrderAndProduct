@@ -23,31 +23,30 @@ namespace ProductService.Application.Commands
         }
         public async Task<CommandResponse<StockQuantityResponse>> Handle(RemoveFromStockCommand request, CancellationToken cancellationToken)
         {
-            var stockQuantityRequest = request.stockQuantityRequest;
-            var currentQuantity = await _repository.GetStockQuantityAsync(stockQuantityRequest.Id);
+            var currentQuantity = await _repository.GetStockQuantityAsync(request.Id);
 
-            if (currentQuantity < stockQuantityRequest.Quantity)
+            if (currentQuantity < request.Quantity)
             {
                 return new CommandResponse<StockQuantityResponse>(
                     false,
                     "Недостаточное количество товара",
                     new StockQuantityResponse
                     {
-                        Id = stockQuantityRequest.Id,
+                        Id = request.Id,
                         StockQuantity = currentQuantity
                     });
             }
 
-            await _repository.RemoveFromStockAsync(stockQuantityRequest.Id, stockQuantityRequest.Quantity);
+            await _repository.RemoveFromStockAsync(request.Id, request.Quantity);
 
-            var updatedQuantity = await _repository.GetStockQuantityAsync(stockQuantityRequest.Id);
+            var updatedQuantity = await _repository.GetStockQuantityAsync(request.Id);
 
             return new CommandResponse<StockQuantityResponse>(
                 true,
                 "Количество товара успешно обновлено",
                 new StockQuantityResponse
                 {
-                    Id = stockQuantityRequest.Id,
+                    Id = request.Id,
                     StockQuantity = updatedQuantity
                 });
         }

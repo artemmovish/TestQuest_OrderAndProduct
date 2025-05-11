@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProductService.Application.Queries
 {
-    public class GetAllProductQuery : IRequest<CommandResponse<List<ProductResponse>>>
+    public class GetAllProductsQuery : IRequest<CommandResponse<List<ProductResponse>>>
     {
 
     }

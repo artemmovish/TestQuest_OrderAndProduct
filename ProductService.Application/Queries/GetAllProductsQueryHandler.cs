@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace ProductService.Application.Queries
 {
-    public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQuery, CommandResponse<List<ProductResponse>>>
+    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, CommandResponse<List<ProductResponse>>>
     {
         private readonly IProductRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetAllProductQueryHandler(IProductRepository repository, IMapper mapper)
+        public GetAllProductsQueryHandler(IProductRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<CommandResponse<List<ProductResponse>>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<List<ProductResponse>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await _repository.GetAsync();
 

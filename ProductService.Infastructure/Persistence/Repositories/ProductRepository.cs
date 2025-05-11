@@ -33,16 +33,8 @@ namespace ProductService.Infastructure.Persistence.Repositories
 
         public async Task<ProductEntity?> GetAsync(Guid id)
         {
-            try
-            {
-                return await _context.Products
+            return await _context.Products
                 .FirstOrDefaultAsync(p => p.Id == id);
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException($"Ошибка при получении продукта с ID: {id}", ex);
-            }
-
         }
 
         public async Task<int> GetStockQuantityAsync(Guid id)

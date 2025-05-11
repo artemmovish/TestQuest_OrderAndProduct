@@ -12,6 +12,7 @@ namespace ProductService.Application.Queries
 {
     public class CheckStockQuantityQuery : IRequest<CommandResponse<CheckStockQuantityResponse>>
     {
-        public StockQuantityRequest stockQuantityRequest { get; set; }
+        public Guid Id { get; set; }
+        public int StockQuantity { get; set; }
     }
 }

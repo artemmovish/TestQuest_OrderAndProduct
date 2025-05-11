@@ -12,6 +12,7 @@ namespace ProductService.Application.Commands
 {
     public class AddToStockProductCommand : IRequest<CommandResponse<StockQuantityResponse>>
     {
-        public StockQuantityRequest stockQuantityRequest { get;set;}
+       public Guid Id { get; set; }
+       public int Quantity { get; set; }
     }
 }

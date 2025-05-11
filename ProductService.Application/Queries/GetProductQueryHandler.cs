@@ -23,9 +23,9 @@ namespace ProductService.Application.Queries
         }
         public async Task<CommandResponse<ProductResponse>> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            var getProductRequest = request.getProductRequest;
+            var Id = request.Id;
 
-            var product = await _repository.GetAsync(getProductRequest.Id);
+            var product = await _repository.GetAsync(Id);
 
             if (product == null)
             {
