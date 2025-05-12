@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderService.Application.Commands;
 using OrderService.Application.Queries;
@@ -18,6 +19,7 @@ namespace OrderService.API.Controllers
         }
 
         [HttpGet]
+        [Authorize()]
         public async Task<IActionResult> GetAllOrders()
         {
             var query = new GetAllOrdersQuery();
