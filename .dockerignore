@@ -1,0 +1,10 @@
+**/.git
+**/bin
+**/obj
+**/node_modules
+**/.vs
+**/.vscode
+**/*.user
+**/*.suo
+**/docker-compose.*
+!docker-compose.yml  # Исключение: сам файл docker-compose.yml НЕ игнорируется

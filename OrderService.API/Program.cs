@@ -49,7 +49,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAuthentication()
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:5001";
+        options.Authority = "https://localhost:8081";
         options.TokenValidationParameters.ValidateAudience = false;
     });
 
@@ -74,8 +74,7 @@ builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 // Регистрация HttpClient
 builder.Services.AddHttpClient("MicroserviceClient", client =>
 {
-    // Укажите базовый адрес вашего микросервиса
-    client.BaseAddress = new Uri("https://localhost:7225");
+    client.BaseAddress = new Uri("http://product-service:8082"); // Имя сервиса из docker-compose
 });
 
 var app = builder.Build();
