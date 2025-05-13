@@ -21,7 +21,7 @@ namespace OrderService.API.Controllers
             var client = _httpClientFactory.CreateClient();
 
             // Discovery endpoints from metadata
-            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:8081");
+            var disco = await client.GetDiscoveryDocumentAsync("http://localhost:8080");
             if (disco.IsError)
             {
                 return BadRequest(new { error = disco.Error, exception = disco.Exception?.Message });
