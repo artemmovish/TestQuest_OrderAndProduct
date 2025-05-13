@@ -47,18 +47,18 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAuthentication()
     .AddJwtBearer(options =>
     {
-        options.Authority = "http://identity-server:5000";  // HTTP вместо HTTPS
+        options.Authority = "http://identity-server:5000"; 
         options.TokenValidationParameters.ValidateAudience = false;
 
         if (builder.Environment.IsDevelopment())
         {
-            options.RequireHttpsMetadata = false;  // Отключаем требование HTTPS
+            options.RequireHttpsMetadata = false;
         }
     });
 
 // DbContext
 builder.Services.AddDbContext<OrderDbContext>(options =>
-    options.UseInMemoryDatabase("ProductsDb")); // Или UseSqlServer(...) при наличии БД
+    options.UseInMemoryDatabase("ProductsDb"));
 
 // Репозитории
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
@@ -75,7 +75,6 @@ builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 // Регистрация HttpClient
 builder.Services.AddHttpClient("MicroserviceClient", client =>
 {
-    // Укажите базовый адрес вашего микросервиса
     client.BaseAddress = new Uri("http://localhost:8080");
 });
 
