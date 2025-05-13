@@ -11,8 +11,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -49,11 +47,14 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAuthentication()
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:5001";
+        options.Authority = "http://identity-server:5000";  // HTTP вместо HTTPS
         options.TokenValidationParameters.ValidateAudience = false;
-    });
 
-builder.Services.AddAuthentication();
+        if (builder.Environment.IsDevelopment())
+        {
+            options.RequireHttpsMetadata = false;  // Отключаем требование HTTPS
+        }
+    });
 
 // DbContext
 builder.Services.AddDbContext<OrderDbContext>(options =>
@@ -75,7 +76,7 @@ builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 builder.Services.AddHttpClient("MicroserviceClient", client =>
 {
     // Укажите базовый адрес вашего микросервиса
-    client.BaseAddress = new Uri("https://localhost:7225");
+    client.BaseAddress = new Uri("http://localhost:8080");
 });
 
 var app = builder.Build();
@@ -119,7 +120,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

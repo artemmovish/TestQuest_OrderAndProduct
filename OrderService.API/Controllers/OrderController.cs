@@ -19,7 +19,7 @@ namespace OrderService.API.Controllers
         }
 
         [HttpGet]
-        [Authorize()]
+        //[Authorize()]
         public async Task<IActionResult> GetAllOrders()
         {
             var query = new GetAllOrdersQuery();
